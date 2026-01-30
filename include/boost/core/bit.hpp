@@ -22,8 +22,8 @@ import boost.core;
 // https://www.boost.org/LICENSE_1_0.txt
 
 #include <boost/core/detail/modules.hpp>
-#ifndef BOOST_USE_MODULES
 #include <boost/core/detail/static_assert.hpp>
+#ifndef BOOST_USE_MODULES
 #include <boost/config.hpp>
 #include <boost/cstdint.hpp>
 #include <limits>

@@ -18,6 +18,9 @@
 
 // Without includes
 
+#define BOOST_TEST(expr) ( ::boost::detail::test_impl(#expr, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION, (expr)? true: false) )
+#define BOOST_TEST_NOT(expr) BOOST_TEST(!(expr))
+
 #define BOOST_ERROR(msg) ( ::boost::detail::error_impl(msg, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION) )
 
 #define BOOST_TEST_WITH(expr1,expr2,predicate) ( ::boost::detail::test_with_impl(predicate, #expr1, #expr2, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION, expr1, expr2) )
@@ -77,5 +80,6 @@
     } BOOST_LWT_DETAIL_WHILE_FALSE
 #else
 #  define BOOST_TEST_NO_THROW(EXPR) do { EXPR; } BOOST_LWT_DETAIL_WHILE_FALSE
+#endif
 
 #endif

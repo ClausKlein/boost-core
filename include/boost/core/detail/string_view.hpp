@@ -1274,6 +1274,8 @@ struct std::basic_common_reference<
     using type = boost::core::basic_string_view<Ch>;
 };
 
+#endif
+
 // std::format support
 
 #if !defined(BOOST_NO_CXX20_HDR_FORMAT)
@@ -1282,6 +1284,8 @@ template<class Ch, class Ch2>
 struct std::formatter<boost::core::basic_string_view<Ch>, Ch2>: std::formatter<std::basic_string_view<Ch>, Ch2>
 {
 };
+
+#endif
 
 #endif
 
