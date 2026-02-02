@@ -93,6 +93,7 @@ private:
     int errors_;
 };
 
+BOOST_CORE_MODULE_EXPORT
 inline test_result& test_results()
 {
     static test_result instance;
