@@ -12,6 +12,7 @@ module;
 #if defined(_MSC_VER)
 #include <intrin.h>
 #endif
+#include <boost/throw_exception.hpp>
 
 #define BOOST_CORE_INTERFACE_UNIT
 
@@ -19,7 +20,6 @@ export module boost.core;
 
 import std;
 import boost.assert;
-import boost.throw_exception;
 
 extern "C++" {
 #include <boost/core/detail/is_same.hpp>
