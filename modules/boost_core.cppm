@@ -7,6 +7,7 @@ module;
 #if defined(_MSC_VER)
 #include <boost/core/detail/intrin.hpp>
 #endif
+#include <boost/core/alignof.hpp>
 #include <boost/assert.hpp>
 #include <boost/assert/source_location.hpp>
 #include <boost/static_assert.hpp>
@@ -15,7 +16,6 @@ module;
 #include <boost/config/workaround.hpp>
 #include <boost/current_function.hpp>
 #include <boost/cstdint.hpp>
-#include <boost/core/alignof.hpp>
 
 export module boost.core;
 
