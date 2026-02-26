@@ -7,6 +7,15 @@
 # pragma once
 #endif
 
+#if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
+
+#ifndef BOOST_IN_MODULE_PURVIEW
+import boost.core;
+#endif
+
+#else
+
+#include <boost/core/detail/modules.hpp>
 #include <boost/config.hpp>
 
 //
@@ -28,7 +37,7 @@ namespace boost
 
 // verify that types are complete for increased safety
 
-template<class T> inline void checked_delete(T * x) BOOST_NOEXCEPT
+BOOST_CORE_MODULE_EXPORT template<class T> inline void checked_delete(T * x) BOOST_NOEXCEPT
 {
 #if defined(__cpp_static_assert) && __cpp_static_assert >= 200410L
 
@@ -44,7 +53,7 @@ template<class T> inline void checked_delete(T * x) BOOST_NOEXCEPT
     delete x;
 }
 
-template<class T> inline void checked_array_delete(T * x) BOOST_NOEXCEPT
+BOOST_CORE_MODULE_EXPORT template<class T> inline void checked_array_delete(T * x) BOOST_NOEXCEPT
 {
 #if defined(__cpp_static_assert) && __cpp_static_assert >= 200410L
 
@@ -89,9 +98,11 @@ template<class T> struct checked_array_deleter
 
 } // namespace checked_deleters
 
-using checked_deleters::checked_deleter;
-using checked_deleters::checked_array_deleter;
+BOOST_CORE_MODULE_EXPORT using checked_deleters::checked_deleter;
+BOOST_CORE_MODULE_EXPORT using checked_deleters::checked_array_deleter;
 
 } // namespace boost
+
+#endif
 
 #endif  // #ifndef BOOST_CORE_CHECKED_DELETE_HPP

@@ -16,6 +16,14 @@
 #ifndef BOOST_CORE_FUNCTOR_HPP
 #define BOOST_CORE_FUNCTOR_HPP
 
+#if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
+#ifndef BOOST_IN_MODULE_PURVIEW
+import boost.core;
+#endif
+#else
+
+#include <boost/core/detail/modules.hpp>
+
 namespace boost::core {
 
 // Block unintended ADL
@@ -34,8 +42,10 @@ struct functor
 
 } // namespace functor_ns
 
-using functor_ns::functor;
+BOOST_CORE_MODULE_EXPORT using functor_ns::functor;
 
 } // namespace boost::core
+
+#endif
 
 #endif // BOOST_CORE_FUNCTOR_HPP

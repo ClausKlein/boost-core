@@ -14,6 +14,14 @@
 // avoid ambiguity when swapping objects of a Boost type that does
 // not have its own boost::swap overload.
 
+#if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
+#ifndef BOOST_IN_MODULE_PURVIEW
+import boost.core;
+#endif
+#else
+
+
+#include <boost/core/detail/modules.hpp>
 #include <boost/core/enable_if.hpp>
 #include <boost/config.hpp>
 #include <boost/config/header_deprecated.hpp>
@@ -27,7 +35,7 @@ BOOST_HEADER_DEPRECATED("boost/core/invoke_swap.hpp")
 
 namespace boost
 {
-  template<class T1, class T2>
+  BOOST_CORE_MODULE_EXPORT template<class T1, class T2>
   BOOST_GPU_ENABLED
   BOOST_DEPRECATED("This function is deprecated, use boost::core::invoke_swap instead.")
   inline typename enable_if_c< !boost_swap_impl::is_const<T1>::value && !boost_swap_impl::is_const<T2>::value >::type
@@ -36,5 +44,7 @@ namespace boost
     boost::core::invoke_swap(left, right);
   }
 }
+
+#endif
 
 #endif // BOOST_CORE_SWAP_HPP

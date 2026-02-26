@@ -17,7 +17,14 @@
 #ifndef BOOST_CORE_FCLOSE_DELETER_HPP
 #define BOOST_CORE_FCLOSE_DELETER_HPP
 
-#include <cstdio>
+#if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
+#ifndef BOOST_IN_MODULE_PURVIEW
+import boost.core;
+#endif
+#else
+
+#include <boost/core/detail/modules.hpp>
+#include <boost/config/std/cstdio.hpp>
 #include <boost/config.hpp>
 
 #ifdef BOOST_HAS_PRAGMA_ONCE
@@ -46,8 +53,10 @@ struct fclose_deleter
 
 } // namespace fclose_deleter_ns
 
-using fclose_deleter_ns::fclose_deleter;
+BOOST_CORE_MODULE_EXPORT using fclose_deleter_ns::fclose_deleter;
 
 } // namespace boost
+
+#endif
 
 #endif // BOOST_CORE_FCLOSE_DELETER_HPP
