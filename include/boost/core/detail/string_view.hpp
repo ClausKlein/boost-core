@@ -9,7 +9,9 @@
 
 #if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
 
+#ifndef BOOST_IN_MODULE_PURVIEW
 import boost.core;
+#endif
 
 #else
 
@@ -22,30 +24,27 @@ import boost.core;
 #include <boost/core/enable_if.hpp>
 #include <boost/core/detail/is_same.hpp>
 #include <boost/core/detail/modules.hpp>
-
-#ifndef BOOST_USE_MODULES
 #include <boost/assert.hpp>
 #include <boost/assert/source_location.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/config.hpp>
-#include <string>
-#include <algorithm>
-#include <utility>
-#include <stdexcept>
-#include <cstddef>
-#include <cstring>
-#include <climits>
-#include <iosfwd>
-#include <ios>
+#include <boost/config/std/string.hpp>
+#include <boost/config/std/algorithm.hpp>
+#include <boost/config/std/utility.hpp>
+#include <boost/config/std/stdexcept.hpp>
+#include <boost/config/std/cstddef.hpp>
+#include <boost/config/std/cstring.hpp>
+#include <boost/config/std/climits.hpp>
+#include <boost/config/std/iosfwd.hpp>
+#include <boost/config/std/ios.hpp>
 #if !defined(BOOST_NO_CXX17_HDR_STRING_VIEW)
-# include <string_view>
+# include <boost/config/std/string_view.hpp>
 #endif
 #if !defined(BOOST_NO_CXX20_HDR_CONCEPTS) // std::common_reference_with
-# include <type_traits>
+# include <boost/config/std/type_traits.hpp>
 #endif
 #if !defined(BOOST_NO_CXX20_HDR_FORMAT)
-# include <format> // std::formatter
-#endif
+# include <boost/config/std/format.hpp> // std::formatter
 #endif
 
 namespace boost
