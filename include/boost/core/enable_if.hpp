@@ -16,14 +16,14 @@
 
 #if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
 
+#ifndef BOOST_IN_MODULE_PURVIEW
 import boost.core;
+#endif
 
 #else
 
 #include <boost/core/detail/modules.hpp>
-#ifndef BOOST_USE_MODULES
 #include <boost/config.hpp>
-#endif
 
 // Even the definition of enable_if causes problems on some compilers,
 // so it's macroed out for all compilers that do not support SFINAE
