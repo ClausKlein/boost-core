@@ -9,7 +9,9 @@
 
 #if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
 
+#ifndef BOOST_IN_MODULE_PURVIEW
 import boost.core;
+#endif
 
 #else
 
@@ -21,19 +23,17 @@ import boost.core;
 
 #include <boost/core/detail/modules.hpp>
 #include <boost/core/demangle.hpp>
-#ifndef BOOST_USE_MODULES
 #include <boost/config.hpp>
-#include <string>
-#include <functional>
-#include <memory>
-#include <utility>
-#include <cstdio>
-#include <cstddef>
-#include <cstring>
-#include <iosfwd>
+#include <boost/config/std/string.hpp>
+#include <boost/config/std/functional.hpp>
+#include <boost/config/std/memory.hpp>
+#include <boost/config/std/utility.hpp>
+#include <boost/config/std/cstdio.hpp>
+#include <boost/config/std/cstddef.hpp>
+#include <boost/config/std/cstring.hpp>
+#include <boost/config/std/iosfwd.hpp>
 #if !defined(BOOST_NO_CXX17_HDR_STRING_VIEW)
-# include <string_view>
-#endif
+# include <boost/config/std/string_view.hpp>
 #endif
 
 namespace boost
