@@ -11,15 +11,14 @@
 
 #if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
 
+#ifndef BOOST_IN_MODULE_PURVIEW
 import boost.core;
+#endif
 
 #else
 
 #include <boost/core/detail/modules.hpp>
-#ifndef BOOST_USE_MODULES
 #include <boost/cstdint.hpp>
-#endif
-
 
 namespace boost
 {
