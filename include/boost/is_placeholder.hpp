@@ -7,6 +7,12 @@
 # pragma once
 #endif
 
+#if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
+#ifndef BOOST_IN_MODULE_PURVIEW
+import boost.core;
+#endif
+#else
+
 
 //  is_placeholder.hpp - TR1 is_placeholder metafunction
 //
@@ -21,11 +27,13 @@
 namespace boost
 {
 
-template< class T > struct is_placeholder
+BOOST_CORE_MODULE_EXPORT template< class T > struct is_placeholder
 {
     enum _vt { value = 0 };
 };
 
 } // namespace boost
+
+#endif
 
 #endif // #ifndef BOOST_IS_PLACEHOLDER_HPP_INCLUDED

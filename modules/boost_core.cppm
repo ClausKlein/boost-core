@@ -75,3 +75,7 @@ import std;
 #include <boost/core/invoke_swap.hpp>
 #include <boost/core/alloc_construct.hpp>
 #include <boost/core/underlying_type.hpp>
+#include <boost/is_placeholder.hpp>
+#include <boost/non_type.hpp>
+#include <boost/type.hpp>
+#include <boost/visit_each.hpp>

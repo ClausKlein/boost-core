@@ -2,6 +2,12 @@
 // Distributed under the Boost Software License, Version 1.0. (See
 // accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
+
+// Make the header safe to include from libraries supporting modules
+#if defined(BOOST_IN_MODULE_PURVIEW) && !defined(GET_POINTER_DWA20021219_HPP)
+#  error "Please #include <boost/get_pointer.hpp> in your module global fragment"
+#endif
+
 #ifndef GET_POINTER_DWA20021219_HPP
 #define GET_POINTER_DWA20021219_HPP
 
