@@ -37,7 +37,7 @@ namespace boost {
 namespace fclose_deleter_ns {
 
 //! A function object that closes a file
-struct fclose_deleter
+BOOST_CORE_MODULE_EXPORT struct fclose_deleter
 {
     //! Function object result type
     typedef void result_type;

@@ -15,6 +15,7 @@ module;
 #include <boost/config/workaround.hpp>
 #include <boost/current_function.hpp>
 #include <boost/cstdint.hpp>
+#include <boost/core/alignof.hpp>
 
 export module boost.core;
 
@@ -55,7 +56,6 @@ import std;
 #include <boost/core/functor.hpp>
 #include <boost/core/identity.hpp>
 #include <boost/core/ignore_unused.hpp>
-#include <boost/core/is_same.hpp>
 #include <boost/core/launder.hpp>
 #include <boost/core/max_align.hpp>
 #include <boost/core/memory_resource.hpp>
@@ -67,7 +67,6 @@ import std;
 #include <boost/core/pointer_in_range.hpp>
 #include <boost/core/pointer_traits.hpp>
 #include <boost/core/ref.hpp>
-#include <boost/core/swap.hpp>
 #include <boost/core/use_default.hpp>
 #include <boost/core/verbose_terminate_handler.hpp>
 #include <boost/core/allocator_access.hpp>

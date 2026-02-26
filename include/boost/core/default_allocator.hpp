@@ -64,7 +64,7 @@ struct add_reference<const void> {
     typedef const void type;
 };
 
-template<class T>
+BOOST_CORE_MODULE_EXPORT template<class T>
 struct default_allocator {
     typedef T value_type;
     typedef T* pointer;

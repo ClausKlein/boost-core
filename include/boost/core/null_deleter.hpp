@@ -38,7 +38,7 @@ namespace boost {
 namespace null_deleter_ns {
 
 //! A function object that does nothing and can be used as an empty deleter for \c shared_ptr
-struct null_deleter
+BOOST_CORE_MODULE_EXPORT struct null_deleter
 {
     //! Function object result type
     typedef void result_type;

@@ -73,7 +73,7 @@ BOOST_CORE_MODULE_EXPORT template<class T> inline void checked_array_delete(T * 
 namespace checked_deleters
 {
 
-template<class T> struct checked_deleter
+BOOST_CORE_MODULE_EXPORT template<class T> struct checked_deleter
 {
     typedef void result_type;
     typedef T * argument_type;
@@ -85,7 +85,7 @@ template<class T> struct checked_deleter
     }
 };
 
-template<class T> struct checked_array_deleter
+BOOST_CORE_MODULE_EXPORT template<class T> struct checked_array_deleter
 {
     typedef void result_type;
     typedef T * argument_type;

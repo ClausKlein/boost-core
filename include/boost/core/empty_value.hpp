@@ -54,7 +54,7 @@ BOOST_CORE_MODULE_EXPORT struct empty_init_t { };
 
 namespace empty_ {
 
-template<class T, unsigned N = 0,
+BOOST_CORE_MODULE_EXPORT template<class T, unsigned N = 0,
     bool E = boost::use_empty_value_base<T>::value>
 class empty_value {
 public:
@@ -143,7 +143,7 @@ public:
 } /* detail */
 #endif
 
-template<class T, unsigned N>
+BOOST_CORE_MODULE_EXPORT template<class T, unsigned N>
 class empty_value<T, N, true>
 #if defined(BOOST_MSVC)
     : detail::empty_value_base<T> {

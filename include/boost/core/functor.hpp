@@ -30,7 +30,7 @@ namespace boost::core {
 namespace functor_ns {
 
 //! A function object that invokes a function specified as its template parameter
-template< auto Function >
+BOOST_CORE_MODULE_EXPORT template< auto Function >
 struct functor
 {
     template< typename... Args >
