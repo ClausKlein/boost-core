@@ -21,6 +21,16 @@ import std;
 #define BOOST_CORE_INTERFACE_UNIT
 #define BOOST_IN_MODULE_PURVIEW
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winclude-angled-in-module-purview"
+#endif
+
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 5244)
+#endif
+
 extern "C++" {
 #include <boost/core/detail/is_same.hpp>
 #include <boost/core/detail/string_view.hpp>

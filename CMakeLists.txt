@@ -17,12 +17,6 @@ if (BOOST_USE_MODULES)
   set_target_properties(boost_core PROPERTIES CXX_MODULE_STD 1)
   target_compile_definitions(boost_core PUBLIC BOOST_USE_MODULES)
 
-  # Silence warnings about includes in the purview
-  if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    target_compile_options(boost_core PRIVATE -Wno-include-angled-in-module-purview)
-  elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options(boost_core PRIVATE /wd5244)
-  endif()
 else()
   add_library(boost_core INTERFACE)
   set(__scope INTERFACE)
