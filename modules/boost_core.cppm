@@ -31,7 +31,6 @@ import std;
 #pragma warning(disable : 5244)
 #endif
 
-extern "C++" {
 #include <boost/core/detail/is_same.hpp>
 #include <boost/core/detail/string_view.hpp>
 #include <boost/core/detail/splitmix64.hpp>
@@ -41,4 +40,3 @@ extern "C++" {
 #include <boost/core/lightweight_test_trait.hpp>
 #include <boost/core/type_name.hpp>
 #include <boost/core/bit.hpp>
-}
