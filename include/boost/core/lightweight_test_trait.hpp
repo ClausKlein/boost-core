@@ -7,16 +7,6 @@
 # pragma once
 #endif
 
-#if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
-
-#include <boost/current_function.hpp>
-#include <boost/config.hpp>
-#include <boost/core/lightweight_test_trait_macros_impl.hpp>
-import std; // required by macros
-import boost.core;
-
-#else
-
 // boost/core/lightweight_test_trait.hpp
 //
 // BOOST_TEST_TRAIT_TRUE, BOOST_TEST_TRAIT_FALSE, BOOST_TEST_TRAIT_SAME
@@ -30,20 +20,26 @@ import boost.core;
 // See accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt
 
+// Subset of includes required for exported macros
 #include <boost/core/lightweight_test.hpp>
+#include <boost/config.hpp>
+
+#if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
+#  ifndef BOOST_IN_MODULE_PURVIEW
+    import std; // required by macros
+    import boost.core;
+#  endif
+#else
+
 #include <boost/core/type_name.hpp>
 #include <boost/core/detail/is_same.hpp>
-#include <boost/core/detail/modules.hpp>
-#ifndef BOOST_USE_MODULES
-#include <boost/config.hpp>
-#endif
 
 namespace boost
 {
 namespace detail
 {
 
-BOOST_CORE_MODULE_EXPORT template< class T > inline void test_trait_impl( char const * trait, void (*)( T ),
+template< class T > inline void test_trait_impl( char const * trait, void (*)( T ),
   bool expected, char const * file, int line, char const * function )
 {
     if( T::value == expected )
@@ -63,12 +59,12 @@ BOOST_CORE_MODULE_EXPORT template< class T > inline void test_trait_impl( char c
     }
 }
 
-BOOST_CORE_MODULE_EXPORT template<class T> inline bool test_trait_same_impl_( T )
+template<class T> inline bool test_trait_same_impl_( T )
 {
     return T::value;
 }
 
-BOOST_CORE_MODULE_EXPORT template<class T1, class T2> inline void test_trait_same_impl( char const * types,
+template<class T1, class T2> inline void test_trait_same_impl( char const * types,
   boost::core::detail::is_same<T1, T2> same, char const * file, int line, char const * function )
 {
     if( test_trait_same_impl_( same ) )
@@ -91,8 +87,19 @@ BOOST_CORE_MODULE_EXPORT template<class T1, class T2> inline void test_trait_sam
 } // namespace detail
 } // namespace boost
 
-#include <boost/core/lightweight_test_trait_macros_impl.hpp>
+#endif // defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
 
+// Macros should be defined by this header regardless of whether
+// modules are being used or not
+
+#define BOOST_TEST_TRAIT_TRUE(type) ( ::boost::detail::test_trait_impl(#type, (void(*)type)0, true, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION) )
+#define BOOST_TEST_TRAIT_FALSE(type) ( ::boost::detail::test_trait_impl(#type, (void(*)type)0, false, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION) )
+
+#if defined(__GNUC__)
+// ignoring -Wvariadic-macros with #pragma doesn't work under GCC
+# pragma GCC system_header
 #endif
+
+#define BOOST_TEST_TRAIT_SAME(...) ( ::boost::detail::test_trait_same_impl(#__VA_ARGS__, ::boost::core::detail::is_same< __VA_ARGS__ >(), __FILE__, __LINE__, BOOST_CURRENT_FUNCTION) )
 
 #endif // #ifndef BOOST_CORE_LIGHTWEIGHT_TEST_TRAIT_HPP
