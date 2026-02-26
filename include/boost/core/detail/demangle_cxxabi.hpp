@@ -1,3 +1,8 @@
+// Make the header safe to include from the purview
+#if defined(BOOST_IN_MODULE_PURVIEW) && !defined(BOOST_CORE_DETAIL_CXXABI_HPP_INCLUDED)
+#  error "Please #include <boost/core/detail/demangle_cxxabi.hpp> in your module global fragment"
+#endif
+
 #ifndef BOOST_CORE_DETAIL_CXXABI_HPP_INCLUDED
 #define BOOST_CORE_DETAIL_CXXABI_HPP_INCLUDED
 

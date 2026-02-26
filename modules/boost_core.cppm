@@ -1,6 +1,6 @@
 module;
 
-#include <boost/core/detail/cxxabi.hpp> // must be the 1st one to avoid conflicts with import std
+#include <boost/core/detail/demangle_cxxabi.hpp> // must be the 1st one to avoid conflicts with import std
 #include <cstdlib>
 #include <boost/config.hpp>
 #include <boost/config/workaround.hpp>
@@ -10,7 +10,7 @@ module;
 #include <boost/core/detail/crtdbg.hpp>
 #include <boost/cstdint.hpp>
 #if defined(_MSC_VER)
-#include <intrin.h>
+#include <boost/core/detail/intrin.hpp>
 #endif
 #include <boost/throw_exception.hpp>
 
