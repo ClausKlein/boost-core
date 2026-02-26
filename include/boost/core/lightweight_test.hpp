@@ -7,17 +7,6 @@
 # pragma once
 #endif
 
-#if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
-
-#include <boost/current_function.hpp>
-#include <boost/config.hpp>
-#include <boost/core/lightweight_test_macros_impl.hpp>
-import std; // required by macros
-import boost.core;
-
-#else
-
-
 //
 //  boost/core/lightweight_test.hpp - lightweight test library
 //
@@ -33,10 +22,19 @@ import boost.core;
 //  http://www.boost.org/LICENSE_1_0.txt
 //
 
-#include <boost/core/detail/lwt_unattended.hpp>
-#include <boost/core/detail/modules.hpp>
+// Subset of includes required for exported macros
 #include <boost/current_function.hpp>
 #include <boost/config.hpp>
+
+#if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
+#  ifndef BOOST_IN_MODULE_PURVIEW
+    import std; // required by macros
+    import boost.core;
+#  endif
+#else
+
+#include <boost/core/detail/modules.hpp>
+#include <boost/core/detail/lwt_unattended.hpp>
 #include <exception>
 #include <iostream>
 #include <iterator>
@@ -561,6 +559,11 @@ inline void lwt_init()
 
 } // namespace core
 } // namespace boost
+
+#endif // defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
+
+// Macros should be defined by this header regardless of whether
+// modules are being used or not
 
 #define BOOST_TEST(expr) ( ::boost::detail::test_impl(#expr, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION, (expr)? true: false) )
 #define BOOST_TEST_NOT(expr) BOOST_TEST(!(expr))
