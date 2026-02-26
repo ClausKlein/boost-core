@@ -35,7 +35,6 @@ import boost.core;
 
 #include <boost/core/detail/lwt_unattended.hpp>
 #include <boost/core/detail/modules.hpp>
-#ifndef BOOST_USE_MODULES
 #include <boost/current_function.hpp>
 #include <boost/config.hpp>
 #include <exception>
@@ -46,7 +45,6 @@ import boost.core;
 #include <cstring>
 #include <cstddef>
 #include <cctype>
-#endif
 
 //  IDE's like Visual Studio perform better if output goes to std::cout or
 //  some other stream, so allow user to configure output stream:
@@ -564,8 +562,68 @@ inline void lwt_init()
 } // namespace core
 } // namespace boost
 
-#include <boost/core/lightweight_test_macros_impl.hpp>
+#define BOOST_TEST(expr) ( ::boost::detail::test_impl(#expr, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION, (expr)? true: false) )
+#define BOOST_TEST_NOT(expr) BOOST_TEST(!(expr))
 
+#define BOOST_ERROR(msg) ( ::boost::detail::error_impl(msg, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION) )
+
+#define BOOST_TEST_WITH(expr1,expr2,predicate) ( ::boost::detail::test_with_impl(predicate, #expr1, #expr2, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION, expr1, expr2) )
+
+#define BOOST_TEST_EQ(expr1,expr2) ( ::boost::detail::test_with_impl(::boost::detail::lw_test_eq(), #expr1, #expr2, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION, expr1, expr2) )
+#define BOOST_TEST_NE(expr1,expr2) ( ::boost::detail::test_with_impl(::boost::detail::lw_test_ne(), #expr1, #expr2, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION, expr1, expr2) )
+
+#define BOOST_TEST_LT(expr1,expr2) ( ::boost::detail::test_with_impl(::boost::detail::lw_test_lt(), #expr1, #expr2, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION, expr1, expr2) )
+#define BOOST_TEST_LE(expr1,expr2) ( ::boost::detail::test_with_impl(::boost::detail::lw_test_le(), #expr1, #expr2, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION, expr1, expr2) )
+#define BOOST_TEST_GT(expr1,expr2) ( ::boost::detail::test_with_impl(::boost::detail::lw_test_gt(), #expr1, #expr2, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION, expr1, expr2) )
+#define BOOST_TEST_GE(expr1,expr2) ( ::boost::detail::test_with_impl(::boost::detail::lw_test_ge(), #expr1, #expr2, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION, expr1, expr2) )
+
+#define BOOST_TEST_CSTR_EQ(expr1,expr2) ( ::boost::detail::test_cstr_eq_impl(#expr1, #expr2, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION, expr1, expr2) )
+#define BOOST_TEST_CSTR_NE(expr1,expr2) ( ::boost::detail::test_cstr_ne_impl(#expr1, #expr2, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION, expr1, expr2) )
+
+#define BOOST_TEST_ALL_EQ(begin1, end1, begin2, end2) ( ::boost::detail::test_all_eq_impl(BOOST_LIGHTWEIGHT_TEST_OSTREAM, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION, begin1, end1, begin2, end2) )
+#define BOOST_TEST_ALL_WITH(begin1, end1, begin2, end2, predicate) ( ::boost::detail::test_all_with_impl(BOOST_LIGHTWEIGHT_TEST_OSTREAM, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION, begin1, end1, begin2, end2, predicate) )
+
+#if defined(BOOST_MSVC) && BOOST_MSVC < 1900
+# define BOOST_LWT_DETAIL_WHILE_FALSE __pragma(warning(push)) __pragma(warning(disable:4127)) while(false) __pragma(warning(pop))
+#else
+# define BOOST_LWT_DETAIL_WHILE_FALSE while(false)
+#endif
+
+#ifndef BOOST_NO_EXCEPTIONS
+   #define BOOST_TEST_THROWS( EXPR, EXCEP )                              \
+      do {                                                               \
+         try {                                                           \
+            EXPR;                                                        \
+            ::boost::detail::throw_failed_impl                           \
+            (#EXPR, #EXCEP, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION); \
+         }                                                               \
+         catch(EXCEP const&) {                                           \
+            ::boost::detail::test_results();                             \
+         }                                                               \
+         catch(...) {                                                    \
+            ::boost::detail::throw_failed_impl                           \
+            (#EXPR, #EXCEP, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION); \
+         }                                                               \
+      } BOOST_LWT_DETAIL_WHILE_FALSE
+#else
+   #define BOOST_TEST_THROWS( EXPR, EXCEP ) do {} BOOST_LWT_DETAIL_WHILE_FALSE
+#endif
+
+#ifndef BOOST_NO_EXCEPTIONS
+#  define BOOST_TEST_NO_THROW(EXPR)                                        \
+    do {                                                                   \
+        try {                                                              \
+            EXPR;                                                          \
+        } catch (const std::exception& e) {                                \
+            ::boost::detail::no_throw_failed_impl                          \
+            (#EXPR, e.what(), __FILE__, __LINE__, BOOST_CURRENT_FUNCTION); \
+        } catch (...) {                                                    \
+            ::boost::detail::no_throw_failed_impl                          \
+            (#EXPR, __FILE__, __LINE__, BOOST_CURRENT_FUNCTION);           \
+        }                                                                  \
+    } BOOST_LWT_DETAIL_WHILE_FALSE
+#else
+#  define BOOST_TEST_NO_THROW(EXPR) do { EXPR; } BOOST_LWT_DETAIL_WHILE_FALSE
 #endif
 
 #endif // #ifndef BOOST_CORE_LIGHTWEIGHT_TEST_HPP
