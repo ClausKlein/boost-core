@@ -1,12 +1,12 @@
 module;
 
+#include <boost/core/detail/cxxabi.hpp> // must be the 1st one to avoid conflicts with import std
 #include <cstdlib>
 #include <boost/config.hpp>
 #include <boost/config/workaround.hpp>
 #include <boost/static_assert.hpp>
 #include <boost/assert.hpp>
-#include <boost/assert/current_location.hpp>
-#include <boost/core/detail/cxxabi.hpp>
+#include <boost/assert/source_location.hpp>
 #include <boost/core/detail/crtdbg.hpp>
 #include <boost/cstdint.hpp>
 #if defined(_MSC_VER)
@@ -14,12 +14,12 @@ module;
 #endif
 #include <boost/throw_exception.hpp>
 
-#define BOOST_CORE_INTERFACE_UNIT
-
 export module boost.core;
 
 import std;
-import boost.assert;
+
+#define BOOST_CORE_INTERFACE_UNIT
+#define BOOST_IN_MODULE_PURVIEW
 
 extern "C++" {
 #include <boost/core/detail/is_same.hpp>
