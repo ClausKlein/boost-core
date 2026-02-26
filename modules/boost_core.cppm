@@ -74,3 +74,4 @@ import std;
 #include <boost/core/empty_value.hpp>
 #include <boost/core/invoke_swap.hpp>
 #include <boost/core/alloc_construct.hpp>
+#include <boost/core/underlying_type.hpp>
