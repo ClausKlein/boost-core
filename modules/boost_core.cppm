@@ -79,3 +79,4 @@ import std;
 #include <boost/non_type.hpp>
 #include <boost/type.hpp>
 #include <boost/visit_each.hpp>
+#include <boost/get_pointer.hpp>

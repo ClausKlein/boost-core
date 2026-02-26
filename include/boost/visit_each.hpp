@@ -15,6 +15,8 @@ import boost.core;
 #endif
 #else
 
+#include <boost/core/detail/modules.hpp>
+
 namespace boost {
   BOOST_CORE_MODULE_EXPORT template<typename Visitor, typename T>
   inline void visit_each(Visitor& visitor, const T& t, long)

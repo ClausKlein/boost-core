@@ -17,6 +17,7 @@ import boost.core;
 #endif
 #else
 
+#include <boost/core/detail/modules.hpp>
 
 namespace boost {
 

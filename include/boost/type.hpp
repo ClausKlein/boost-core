@@ -12,6 +12,8 @@ import boost.core;
 #endif
 #else
 
+#include <boost/core/detail/modules.hpp>
+
 namespace boost {
 
   // Just a simple "type envelope". Useful in various contexts, mostly to work

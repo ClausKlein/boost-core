@@ -7,13 +7,6 @@
 # pragma once
 #endif
 
-#if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
-#ifndef BOOST_IN_MODULE_PURVIEW
-import boost.core;
-#endif
-#else
-
-
 //  is_placeholder.hpp - TR1 is_placeholder metafunction
 //
 //  Copyright (c) 2006 Peter Dimov
@@ -22,6 +15,14 @@ import boost.core;
 //
 //  See accompanying file LICENSE_1_0.txt or copy at
 //  http://www.boost.org/LICENSE_1_0.txt
+
+#if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
+#ifndef BOOST_IN_MODULE_PURVIEW
+import boost.core;
+#endif
+#else
+
+#include <boost/core/detail/modules.hpp>
 
 
 namespace boost
