@@ -143,7 +143,7 @@ public:
 } /* detail */
 #endif
 
-BOOST_CORE_MODULE_EXPORT template<class T, unsigned N>
+template<class T, unsigned N>
 class empty_value<T, N, true>
 #if defined(BOOST_MSVC)
     : detail::empty_value_base<T> {
