@@ -18,15 +18,18 @@ import boost.core;
 
 #else
 
-#include <boost/core/detail/modules.hpp>
 #include <boost/config.hpp>
-#include <boost/core/detail/demangle_cxxabi.hpp>
-#include <boost/config/std/cstdlib.hpp>
-#include <boost/config/std/cstddef.hpp>
 #include <boost/config/std/string.hpp>
+#include <boost/core/detail/modules.hpp>
 
 #if defined(BOOST_HAS_PRAGMA_ONCE)
 # pragma once
+#endif
+
+#include <boost/core/detail/demangle_cxxabi.hpp>
+#if defined( BOOST_CORE_HAS_CXXABI_H )
+#  include <boost/config/std/cstdlib.hpp>
+#  include <boost/config/std/cstddef.hpp>
 #endif
 
 namespace boost
