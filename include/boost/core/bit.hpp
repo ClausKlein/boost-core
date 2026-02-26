@@ -9,7 +9,9 @@
 
 #if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
 
+#ifndef BOOST_IN_MODULE_PURVIEW
 import boost.core;
+#endif
 
 #else
 
@@ -23,19 +25,14 @@ import boost.core;
 
 #include <boost/core/detail/modules.hpp>
 #include <boost/core/detail/static_assert.hpp>
-#ifndef BOOST_USE_MODULES
 #include <boost/config.hpp>
 #include <boost/cstdint.hpp>
-#include <limits>
-#include <cstring>
-#include <cstdlib>
-#if defined(_MSC_VER)
-#include <intrin.h>
-#endif
-#endif
+#include <boost/config/std/limits.hpp>
+#include <boost/config/std/cstring.hpp>
+#include <boost/config/std/cstdlib.hpp>
 
 #if defined(_MSC_VER)
-
+# include <boost/core/detail/intrin.hpp>
 # pragma intrinsic(_BitScanForward)
 # pragma intrinsic(_BitScanReverse)
 
