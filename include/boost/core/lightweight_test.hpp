@@ -26,6 +26,12 @@
 #include <boost/current_function.hpp>
 #include <boost/config.hpp>
 
+//  IDE's like Visual Studio perform better if output goes to std::cout or
+//  some other stream, so allow user to configure output stream:
+#ifndef BOOST_LIGHTWEIGHT_TEST_OSTREAM
+# define BOOST_LIGHTWEIGHT_TEST_OSTREAM std::cerr
+#endif
+
 #if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
 #  ifndef BOOST_IN_MODULE_PURVIEW
     import std; // required by macros
@@ -35,20 +41,15 @@
 
 #include <boost/core/detail/modules.hpp>
 #include <boost/core/detail/lwt_unattended.hpp>
-#include <exception>
-#include <iostream>
-#include <iterator>
-#include <string>
-#include <cstdlib>
-#include <cstring>
-#include <cstddef>
-#include <cctype>
+#include <boost/config/std/exception.hpp>
+#include <boost/config/std/iostream.hpp>
+#include <boost/config/std/iterator.hpp>
+#include <boost/config/std/string.hpp>
+#include <boost/config/std/cstdlib.hpp>
+#include <boost/config/std/cstring.hpp>
+#include <boost/config/std/cstddef.hpp>
+#include <boost/config/std/cctype.hpp>
 
-//  IDE's like Visual Studio perform better if output goes to std::cout or
-//  some other stream, so allow user to configure output stream:
-#ifndef BOOST_LIGHTWEIGHT_TEST_OSTREAM
-# define BOOST_LIGHTWEIGHT_TEST_OSTREAM std::cerr
-#endif
 
 namespace boost
 {

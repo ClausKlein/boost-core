@@ -7,6 +7,8 @@ module;
 #include <boost/static_assert.hpp>
 #include <boost/assert.hpp>
 #include <boost/assert/source_location.hpp>
+#include <boost/current_function.hpp>
+#include <boost/core/detail/lwt_unattended.hpp>
 #include <boost/cstdint.hpp>
 #if defined(_MSC_VER)
 #include <boost/core/detail/intrin.hpp>
