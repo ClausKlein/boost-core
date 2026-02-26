@@ -69,19 +69,19 @@ public:
 
 #if defined( BOOST_CORE_HAS_CXXABI_H )
 
-inline char const * demangle_alloc( char const * name ) BOOST_NOEXCEPT
+BOOST_CORE_MODULE_EXPORT inline char const * demangle_alloc( char const * name ) BOOST_NOEXCEPT
 {
     int status = 0;
     std::size_t size = 0;
     return abi::__cxa_demangle( name, NULL, &size, &status );
 }
 
-inline void demangle_free( char const * name ) BOOST_NOEXCEPT
+BOOST_CORE_MODULE_EXPORT inline void demangle_free( char const * name ) BOOST_NOEXCEPT
 {
     std::free( const_cast< char* >( name ) );
 }
 
-inline std::string demangle( char const * name )
+BOOST_CORE_MODULE_EXPORT inline std::string demangle( char const * name )
 {
     scoped_demangled_name demangled_name( name );
     char const * p = demangled_name.get();
@@ -92,16 +92,16 @@ inline std::string demangle( char const * name )
 
 #else
 
-inline char const * demangle_alloc( char const * name ) BOOST_NOEXCEPT
+BOOST_CORE_MODULE_EXPORT inline char const * demangle_alloc( char const * name ) BOOST_NOEXCEPT
 {
     return name;
 }
 
-inline void demangle_free( char const * ) BOOST_NOEXCEPT
+BOOST_CORE_MODULE_EXPORT inline void demangle_free( char const * ) BOOST_NOEXCEPT
 {
 }
 
-inline std::string demangle( char const * name )
+BOOST_CORE_MODULE_EXPORT inline std::string demangle( char const * name )
 {
     return name;
 }

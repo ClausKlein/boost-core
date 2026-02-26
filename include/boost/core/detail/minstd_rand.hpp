@@ -1,14 +1,6 @@
 #ifndef BOOST_CORE_DETAIL_MINSTD_RAND_HPP_INCLUDED
 #define BOOST_CORE_DETAIL_MINSTD_RAND_HPP_INCLUDED
 
-#if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
-
-#ifndef BOOST_IN_MODULE_PURVIEW
-import boost.core;
-#endif
-
-#else
-
 // Copyright 2017 Peter Dimov
 //
 // Distributed under the Boost Software License, Version 1.0.
@@ -62,7 +54,5 @@ public:
 
 } // namespace detail
 } // namespace boost
-
-#endif
 
 #endif // #ifndef BOOST_CORE_DETAIL_MINSTD_RAND_HPP_INCLUDED
