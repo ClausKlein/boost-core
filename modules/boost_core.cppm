@@ -1,19 +1,18 @@
 module;
 
 #include <boost/core/detail/demangle_cxxabi.hpp> // must be the 1st one to avoid conflicts with import std
-#include <cstdlib>
-#include <boost/config.hpp>
-#include <boost/config/workaround.hpp>
-#include <boost/static_assert.hpp>
-#include <boost/assert.hpp>
-#include <boost/assert/source_location.hpp>
-#include <boost/current_function.hpp>
 #include <boost/core/detail/lwt_unattended.hpp>
-#include <boost/cstdint.hpp>
 #if defined(_MSC_VER)
 #include <boost/core/detail/intrin.hpp>
 #endif
+#include <boost/assert.hpp>
+#include <boost/assert/source_location.hpp>
+#include <boost/static_assert.hpp>
 #include <boost/throw_exception.hpp>
+#include <boost/config.hpp>
+#include <boost/config/workaround.hpp>
+#include <boost/current_function.hpp>
+#include <boost/cstdint.hpp>
 
 export module boost.core;
 
