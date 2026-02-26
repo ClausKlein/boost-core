@@ -32,6 +32,7 @@ import boost.core;
 #include <boost/config/std/cstdlib.hpp>
 
 #if defined(_MSC_VER)
+
 # include <boost/core/detail/intrin.hpp>
 # pragma intrinsic(_BitScanForward)
 # pragma intrinsic(_BitScanReverse)
