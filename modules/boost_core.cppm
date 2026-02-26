@@ -7,7 +7,6 @@ module;
 #include <boost/static_assert.hpp>
 #include <boost/assert.hpp>
 #include <boost/assert/source_location.hpp>
-#include <boost/core/detail/crtdbg.hpp>
 #include <boost/cstdint.hpp>
 #if defined(_MSC_VER)
 #include <boost/core/detail/intrin.hpp>
