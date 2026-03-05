@@ -22,6 +22,11 @@
 //  http://www.boost.org/LICENSE_1_0.txt
 //
 
+// Make the header safe to include from libraries supporting modules
+#if defined(BOOST_IN_MODULE_PURVIEW) && !defined(BOOST_CORE_LIGHTWEIGHT_TEST_HPP) && !defined(BOOST_CORE_INTERFACE_UNIT)
+#  error "Please #include <boost/core/lightweight_test.hpp> in your module global fragment"
+#endif
+
 // Subset of includes required for exported macros
 #include <boost/current_function.hpp>
 #include <boost/config.hpp>
@@ -33,10 +38,9 @@
 #endif
 
 #if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
-#  ifndef BOOST_IN_MODULE_PURVIEW
-    import std; // required by macros
-    import boost.core;
-#  endif
+// Note that we're guaranteed to not be in a purview here
+import std; // required by macros
+import boost.core;
 #else
 
 #include <boost/core/detail/modules.hpp>
