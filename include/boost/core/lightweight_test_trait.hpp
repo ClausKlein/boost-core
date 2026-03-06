@@ -31,7 +31,6 @@
 
 #if defined(BOOST_USE_MODULES) && !defined(BOOST_CORE_INTERFACE_UNIT)
 // Note that we're guaranteed to not be in a purview here
-import std; // required by macros
 import boost.core;
 #else
 

@@ -19,7 +19,7 @@ module;
 
 export module boost.core;
 
-import std;
+export import std; // re-exporting simplifies consuming lightweight_test
 
 #define BOOST_CORE_INTERFACE_UNIT
 #define BOOST_IN_MODULE_PURVIEW
