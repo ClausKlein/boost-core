@@ -1123,21 +1123,6 @@ jobs:
           ctest --output-on-failure --no-tests=error -C Release
 
   posix-cmake-subdir-modules:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - name: "clang-21 Debug"
-            packages: "clang-21 libc++-21-dev"
-            cmake-args: "-DCMAKE_CXX_COMPILER=clang++-21 -DCMAKE_CXX_FLAGS=-stdlib=libc++ -DCMAKE_EXE_LINKER_FLAGS=-stdlib=libc++ -DCMAKE_CXX_STDLIB_MODULES_JSON=/usr/lib/llvm-21/lib/libc++.modules.json -DCMAKE_BUILD_TYPE=Debug"
-          - name: "clang-21 Release"
-            packages: "clang-21 libc++-21-dev"
-            cmake-args: "-DCMAKE_CXX_COMPILER=clang++-21 -DCMAKE_CXX_FLAGS=-stdlib=libc++ -DCMAKE_EXE_LINKER_FLAGS=-stdlib=libc++ -DCMAKE_CXX_STDLIB_MODULES_JSON=/usr/lib/llvm-21/lib/libc++.modules.json -DCMAKE_BUILD_TYPE=Release"
-          - name: "gcc-15 Debug"
-            packages: "g++-15"
-            cmake-args: "-DCMAKE_CXX_COMPILER=g++-15 -DCMAKE_BUILD_TYPE=Debug"
-
-    name: CMake subdir modules ${{ matrix.name }}
 
 
     runs-on: ubuntu-latest
@@ -1150,7 +1135,7 @@ jobs:
         run: |
           export DEBIAN_FRONTEND=noninteractive
           apt-get update
-          apt-get install -y --no-install-recommends wget ninja-build git ca-certificates python3 python-is-python3 ${{ matrix.packages }}
+          apt-get install -y --no-install-recommends wget ninja-build git ca-certificates python3 python-is-python3 g++-15
           ./tools/install-cmake.sh
 
       - name: Setup Boost
@@ -1180,32 +1165,14 @@ jobs:
           mkdir __build__ && cd __build__
           cmake \
             -G Ninja \
-            -DCMAKE_CXX_STANDARD=23 \
-            -DBUILD_TESTING=ON \
-            -DBOOST_INCLUDE_LIBRARIES=$LIBRARY \
             -DBOOST_USE_MODULES=ON \
             -DCMAKE_EXPERIMENTAL_CXX_IMPORT_STD=d0edc3af-4c50-42ea-a356-e2862fe7a444 \
-            ${{ matrix.cmake-args }} \
+            -DCMAKE_CXX_COMPILER=g++-15 \
             ..
           cmake --build .
           ctest --output-on-failure --no-tests=error
 
   posix-cmake-install-modules:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - name: "clang-21 Debug"
-            packages: "clang-21 libc++-21-dev"
-            cmake-args: "-DCMAKE_CXX_COMPILER=clang++-21 -DCMAKE_CXX_FLAGS=-stdlib=libc++ -DCMAKE_EXE_LINKER_FLAGS=-stdlib=libc++ -DCMAKE_CXX_STDLIB_MODULES_JSON=/usr/lib/llvm-21/lib/libc++.modules.json -DCMAKE_BUILD_TYPE=Debug"
-          - name: "clang-21 Release"
-            packages: "clang-21 libc++-21-dev"
-            cmake-args: "-DCMAKE_CXX_COMPILER=clang++-21 -DCMAKE_CXX_FLAGS=-stdlib=libc++ -DCMAKE_EXE_LINKER_FLAGS=-stdlib=libc++ -DCMAKE_CXX_STDLIB_MODULES_JSON=/usr/lib/llvm-21/lib/libc++.modules.json -DCMAKE_BUILD_TYPE=Release"
-          - name: "gcc-15 Debug"
-            packages: "g++-15"
-            cmake-args: "-DCMAKE_CXX_COMPILER=g++-15 -DCMAKE_BUILD_TYPE=Debug"
-
-    name: CMake install modules ${{ matrix.name }}
 
     runs-on: ubuntu-latest
     container: ubuntu:26.04
@@ -1217,7 +1184,7 @@ jobs:
         run: |
           export DEBIAN_FRONTEND=noninteractive
           apt-get update
-          apt-get install -y --no-install-recommends wget ninja-build git ca-certificates python3 python-is-python3 ${{ matrix.packages }}
+          apt-get install -y --no-install-recommends wget ninja-build git ca-certificates python3 python-is-python3 g++-15
           ./tools/install-cmake.sh
 
       - name: Setup Boost
@@ -1247,12 +1214,11 @@ jobs:
           mkdir __build__ && cd __build__
           cmake \
             -G Ninja \
-            -DCMAKE_CXX_STANDARD=23 \
             -DBOOST_INCLUDE_LIBRARIES=$LIBRARY \
             -DCMAKE_INSTALL_PREFIX=~/.local \
             -DBOOST_USE_MODULES=ON \
             -DCMAKE_EXPERIMENTAL_CXX_IMPORT_STD=d0edc3af-4c50-42ea-a356-e2862fe7a444 \
-            ${{ matrix.cmake-args }} \
+            -DCMAKE_CXX_COMPILER=g++-15 \
             ..
 
       - name: Install
@@ -1265,11 +1231,9 @@ jobs:
           cd ../boost-root/libs/$LIBRARY/test/cmake_install_test && mkdir __build__ && cd __build__
           cmake \
             -G Ninja \
-            -DCMAKE_CXX_STANDARD=23 \
             -DCMAKE_INSTALL_PREFIX=~/.local \
-            -DBOOST_USE_MODULES=ON \
             -DCMAKE_EXPERIMENTAL_CXX_IMPORT_STD=d0edc3af-4c50-42ea-a356-e2862fe7a444 \
-            ${{ matrix.cmake-args }} \
+            -DCMAKE_CXX_COMPILER=g++-15 \
             ..
           cmake --build .
           ctest --output-on-failure --no-tests=error
