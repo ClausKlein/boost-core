@@ -47,17 +47,17 @@ private:
     char const * m_p;
 
 public:
-    explicit scoped_demangled_name( char const * name ) BOOST_NOEXCEPT :
+    inline explicit scoped_demangled_name( char const * name ) BOOST_NOEXCEPT :
         m_p( demangle_alloc( name ) )
     {
     }
 
-    ~scoped_demangled_name() BOOST_NOEXCEPT
+    inline ~scoped_demangled_name() BOOST_NOEXCEPT
     {
         demangle_free( m_p );
     }
 
-    char const * get() const BOOST_NOEXCEPT
+    inline char const * get() const BOOST_NOEXCEPT
     {
         return m_p;
     }

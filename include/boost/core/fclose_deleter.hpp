@@ -44,7 +44,7 @@ BOOST_CORE_MODULE_EXPORT struct fclose_deleter
     /*!
      * Closes the file handle
      */
-    void operator() (std::FILE* p) const BOOST_NOEXCEPT
+    inline void operator() (std::FILE* p) const BOOST_NOEXCEPT
     {
         if (BOOST_LIKELY(!!p))
             std::fclose(p);

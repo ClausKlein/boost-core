@@ -34,15 +34,15 @@ private:
 
 public:
 
-    splitmix64(): x_( 0 )
+    inline splitmix64(): x_( 0 )
     {
     }
 
-    explicit splitmix64( boost::uint64_t seed ): x_( seed )
+    inline explicit splitmix64( boost::uint64_t seed ): x_( seed )
     {
     }
 
-    boost::uint64_t operator()()
+    inline boost::uint64_t operator()()
     {
         x_ += ( boost::uint64_t(0x9e3779b9u) << 32 ) + 0x7f4a7c15u;
 

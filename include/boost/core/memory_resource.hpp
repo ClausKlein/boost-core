@@ -73,7 +73,7 @@ public:
 
 #endif
 
-    BOOST_ATTRIBUTE_NODISCARD void* allocate( std::size_t bytes, std::size_t alignment = max_align )
+    BOOST_ATTRIBUTE_NODISCARD inline void* allocate( std::size_t bytes, std::size_t alignment = max_align )
     {
         // https://github.com/boostorg/container/issues/199
         // https://cplusplus.github.io/LWG/issue3471
@@ -81,12 +81,12 @@ public:
         return ::operator new( bytes, do_allocate( bytes, alignment ), core::detail::placement_new_tag() );
     }
 
-    void deallocate( void* p, std::size_t bytes, std::size_t alignment = max_align )
+    inline void deallocate( void* p, std::size_t bytes, std::size_t alignment = max_align )
     {
         do_deallocate( p, bytes, alignment );
     }
 
-    bool is_equal( memory_resource const & other ) const BOOST_NOEXCEPT
+    inline bool is_equal( memory_resource const & other ) const BOOST_NOEXCEPT
     {
         return do_is_equal( other );
     }

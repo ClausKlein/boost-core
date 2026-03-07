@@ -46,11 +46,11 @@ private:
 
 public:
 
-    typeinfo( char const * name, void (*lib_id)() ): name_( name ), lib_id_( lib_id )
+    inline typeinfo( char const * name, void (*lib_id)() ): name_( name ), lib_id_( lib_id )
     {
     }
 
-    bool operator==( typeinfo const& rhs ) const
+    inline bool operator==( typeinfo const& rhs ) const
     {
 #if ( defined(_WIN32) || defined(__CYGWIN__) ) && ( defined(__GNUC__) || defined(__clang__) ) && !defined(BOOST_DISABLE_CURRENT_FUNCTION)
 
@@ -63,12 +63,12 @@ public:
 #endif
     }
 
-    bool operator!=( typeinfo const& rhs ) const
+    inline bool operator!=( typeinfo const& rhs ) const
     {
         return !( *this == rhs );
     }
 
-    bool before( typeinfo const& rhs ) const
+    inline bool before( typeinfo const& rhs ) const
     {
 #if ( defined(_WIN32) || defined(__CYGWIN__) ) && ( defined(__GNUC__) || defined(__clang__) ) && !defined(BOOST_DISABLE_CURRENT_FUNCTION)
 
@@ -81,7 +81,7 @@ public:
 #endif
     }
 
-    char const* name() const
+    inline char const* name() const
     {
         return name_;
     }

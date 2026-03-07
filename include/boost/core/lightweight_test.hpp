@@ -63,12 +63,12 @@ class test_result
 {
 public:
 
-    test_result(): report_( false ), errors_( 0 )
+    inline test_result(): report_( false ), errors_( 0 )
     {
         core::detail::lwt_unattended();
     }
 
-    ~test_result()
+    inline ~test_result()
     {
         if( !report_ )
         {
@@ -77,12 +77,12 @@ public:
         }
     }
 
-    int& errors()
+    inline int& errors()
     {
         return errors_;
     }
 
-    void done()
+    inline void done()
     {
         report_ = true;
     }
