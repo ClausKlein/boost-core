@@ -1218,7 +1218,6 @@ jobs:
             -DBOOST_INCLUDE_LIBRARIES=$LIBRARY \
             -DCMAKE_INSTALL_PREFIX=~/.local \
             -DBOOST_USE_MODULES=ON \
-            -DCMAKE_CXX_MODULE_STD=ON \
             -DCMAKE_EXPERIMENTAL_CXX_IMPORT_STD=d0edc3af-4c50-42ea-a356-e2862fe7a444 \
             -DCMAKE_CXX_COMPILER=g++-15 \
             ..
@@ -1234,6 +1233,7 @@ jobs:
           cmake \
             -G Ninja \
             -DCMAKE_INSTALL_PREFIX=~/.local \
+            -DCMAKE_CXX_MODULE_STD=ON \
             -DCMAKE_EXPERIMENTAL_CXX_IMPORT_STD=d0edc3af-4c50-42ea-a356-e2862fe7a444 \
             -DCMAKE_CXX_COMPILER=g++-15 \
             ..
