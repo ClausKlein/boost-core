@@ -17,7 +17,6 @@ if (BOOST_USE_MODULES)
   target_compile_features(boost_core PUBLIC cxx_std_23)
   set_target_properties(boost_core PROPERTIES CXX_MODULE_STD 1)
   target_compile_definitions(boost_core PUBLIC BOOST_USE_MODULES)
-
 else()
   add_library(boost_core INTERFACE)
   set(__scope INTERFACE)
@@ -35,7 +34,10 @@ target_link_libraries(boost_core
 # -----------------------------------------------------------------------------
 if(NOT BOOST_USE_MODULES)
   target_include_directories(boost_core INTERFACE include)
-else()
+endif()
+
+# usablele if starting with cmake v3.23
+if(NOT CMAKE_VERSION VERSION_LESS 3.23)
   target_sources(
     boost_core
     PUBLIC
